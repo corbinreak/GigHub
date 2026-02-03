@@ -4,12 +4,14 @@ import { Colors } from '../constants/Color';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, {useState} from "react";
 import SlideContainer from "../components/SlideContainer";
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default function Index() {
-  const [isEnabled, setIsEnabled] = React.useState(false);
+  const [isMenuEnabled, setIsMenuEnabled] = React.useState(false);
+  const [startTracking, setStartTracking] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => setIsMenuEnabled(previousState => !previousState);
   
 
   return (
@@ -47,10 +49,10 @@ export default function Index() {
         <View style={styles.switchWrapper}>
        <Switch
          trackColor={{ false: "#767577", true: "#10b981" }}
-         thumbColor={isEnabled ? "#f4F3f4" : "#fff"}
+         thumbColor={isMenuEnabled ? "#f4F3f4" : "#fff"}
          ios_backgroundColor="#3e3e3e"
          onValueChange={toggleSwitch}
-         value={isEnabled}
+         value={isMenuEnabled}
          style={styles.SwitchComponent}
        >
         
@@ -61,14 +63,46 @@ export default function Index() {
    </View>
     {/* Content Area */}
 
-    <View style={[styles.container]}>
+    <View style={[styles.content]}>
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <View style={styles.infoCard}>
+
+        </View>
+      </View>
+    
       
     </View>
     {showProfile && (
       <SlideContainer isVisible={showProfile}>
-        <Pressable onPress={() => setShowProfile(false)}>
-        <Text style={styles.button}>Close</Text>
+       <View style={styles.drawerHeader}>
+          <Text style={styles.title}>Settings</Text>
+          <Ionicons name="settings-sharp" size={20} color={Colors.light.text} />
+        </View>
+        <View style={styles.divider}></View>
+
+        <Pressable style={styles.settingsRow}>
+          <View style={styles.settingsRow}>
+            <Ionicons name="chevron-forward" size={18} color="#555" />
+            <Text style={[ styles.title, {color: Colors.light.text}]}>Profile</Text>
+          </View>
         </Pressable>
+
+
+        <Pressable>
+          <View style={styles.settingsLeft}>
+            <Ionicons name ="chevron-forward" size={18} color="#555" />
+            <Text style={[ styles.title, {color: Colors.light.text}]}>Notifications</Text>
+          </View>
+        </Pressable>
+        
+
+        <Pressable 
+        style={styles.closeButton}
+        onPress={() => setShowProfile(false)}
+        >
+         <Text style={styles.closeTitle}>Close</Text> 
+        </Pressable>
+          
       </SlideContainer>)}
     </SafeAreaView>
   </SafeAreaProvider>
@@ -114,6 +148,48 @@ const styles = StyleSheet.create({
   profilePressable: {
     left: 30,
   },
+  drawerHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#273140',
+    marginBottom: 20,
+
+  },
+  settingsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 15,
+    paddingVertical:15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f9f9f9',
+    marginBottom: 10,
+  },
+  settingsLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  closeButton: {
+    marginTop: 'auto',
+    backgroundColor: '#1a1f26',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+
+  },
+  closeTitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -130,9 +206,9 @@ const styles = StyleSheet.create({
     
   },
   switchLabel: {
-    color: Colors.dark.text,
     fontSize: 10,
     marginTop: 4,
+    color: Colors.dark.text,
     
   },
   imgStyle: {
@@ -142,9 +218,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  infoCard: {
+
+  },
   button: {
     fontSize: 20,
-    color: Colors.light.button,
+   
    
   }
 })

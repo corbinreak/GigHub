@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
 import { Animated, Dimensions, StyleSheet, View, } from 'react-native';
 import {Colors} from '../constants/Color';
-import { Ionicons } from '@expo/vector-icons';
+
 
 const { height, width } = Dimensions.get('window');
 
