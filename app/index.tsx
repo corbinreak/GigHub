@@ -1,12 +1,16 @@
-import { Text, View, StyleSheet, Image, StatusBar, Pressable, Switch, SwitchComponent } from "react-native";
+import { Text, View, StyleSheet, Image, StatusBar, Pressable, Switch, SwitchComponent, Button } from "react-native";
 import {Link} from "expo-router";
 import { Colors } from '../constants/Color';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, {useState} from "react";
+import SlideContainer from "../components/SlideContainer";
+
 
 export default function Index() {
   const [isEnabled, setIsEnabled] = React.useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  
 
   return (
     <SafeAreaProvider>
@@ -16,13 +20,20 @@ export default function Index() {
       
       {/* Left side of header*/}
      <View style={styles.leftHeader}>
-     <Pressable onPress={(e) => {}} style={styles.profilePressable}>
+     <Pressable onPress={() => {setShowProfile(!showProfile)}} style={({pressed}) => [
+        styles.profilePressable,
+        {
+          opacity: pressed ? 0.5 : 1.0
+        }
+     ]}>
+      
       <Image
        source={require('../assets/images/Profile-photo-light.png')} 
        alt="Profile-Picture"
        style={[styles.imgStyle]}
-      />
+      /> 
       </Pressable>
+      
       </View>
 
       {/* Middle/Center side of header*/}
@@ -51,8 +62,14 @@ export default function Index() {
     {/* Content Area */}
 
     <View style={[styles.container]}>
-
+      
     </View>
+    {showProfile && (
+      <SlideContainer isVisible={showProfile}>
+        <Pressable onPress={() => setShowProfile(false)}>
+        <Text style={styles.button}>Close</Text>
+        </Pressable>
+      </SlideContainer>)}
     </SafeAreaView>
   </SafeAreaProvider>
    
@@ -96,7 +113,10 @@ const styles = StyleSheet.create({
   },
   profilePressable: {
     left: 30,
-    
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   switchWrapper: {
     justifyContent: 'center',
@@ -124,7 +144,6 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 20,
-    textDecorationLine: 'underline',
     color: Colors.light.button,
    
   }
