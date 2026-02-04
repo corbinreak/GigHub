@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 export default function Index() {
+  const [selectedScreen, setSelectedScreen] = useState<'Home' | 'Trips' | 'Expenses' | 'Tax'>('Home');
   const [isMenuEnabled, setIsMenuEnabled] = React.useState(false);
   const [startTracking, setStartTracking] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -40,7 +41,8 @@ export default function Index() {
 
       {/* Middle/Center side of header*/}
       <View style={styles.middleHeader}>
-       <Text style={styles.headerText}>Week Of: Jan 25th</Text>
+       <Text style={styles.headerText}>Week Of:</Text>
+        <Text style={styles.headerText}>Aug 12 - Aug 18, 2024</Text>
         </View>
 
 
@@ -57,21 +59,36 @@ export default function Index() {
        >
         
        </Switch>
-       <Text style={styles.switchLabel}>Manually Start Tracking</Text>
+       <Text style={styles.switchLabel}>Track Miles</Text>
        </View>
     </View>
    </View>
     {/* Content Area */}
-
-    <View style={[styles.content]}>
-      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
         <View style={styles.infoCard}>
 
         </View>
-      </View>
     
-      
-    </View>
+      {/* Footer with Icons */}
+      <View style={styles.footerIconDisplay}>
+        <Button
+          title="Go to Details"
+          color={Colors.light.button}
+          onPress={() => {}}
+        />
+        <Button
+          title="Start Shift"
+          color={Colors.light.profit}
+          onPress={() => {
+            setStartTracking(!startTracking);
+          }}
+        >
+
+        </Button>
+      </View>
+
+
+      {/* Slide-out Profile Menu */}
+    
     {showProfile && (
       <SlideContainer isVisible={showProfile}>
        <View style={styles.drawerHeader}>
@@ -124,11 +141,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
+    gap: 10,
     
   },
   leftHeader: { 
     flex: 1,
     alignItems: 'flex-start',
+    marginBottom: 15,
 
   },
   middleHeader:{
@@ -138,12 +157,13 @@ const styles = StyleSheet.create({
   rightHeader:{
     flex: 1,
     alignItems: 'flex-end',
+    marginBottom: 15,
   },
   headerText: {
     textAlign: 'center',
     fontWeight: 'bold',
     color: Colors.dark.text,
-    fontSize: 15,
+    fontSize: 14,
   },
   profilePressable: {
     left: 30,
@@ -198,7 +218,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 2,
-    marginLeft: 10,
+    marginRight: 10,
   },
   SwitchComponent: {
     transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
@@ -219,7 +239,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoCard: {
+    flex: 1,
+    top: -20,
+    backgroundColor: Colors.light.card,
+    borderRadius: 45
+  },
 
+  footerIconDisplay: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   button: {
     fontSize: 20,

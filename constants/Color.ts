@@ -5,7 +5,7 @@ export const Colors = {
         text: '#101417',
         secondaryText: '#64748B',
         background: '#f5f7fa',
-        card: '#fff',
+        card: 'lightgray',
         profit: '#10b981',
         loss: '#ef4444',
         secondary: '#64748b',
