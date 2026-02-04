@@ -77,11 +77,36 @@ export default function Index() {
     
       {/* Footer with Icons */}
       <View style={styles.footerIconContainer}>
+        {/* Home Icon */}
         <Pressable onPress={() => {setSelectedScreen('Home'); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
           { opacity: pressed ? 0.5 : 1, alignItems: 'center', justifyContent: 'center'}
         ]}>
           <Ionicons name={selectedScreen === 'Home' ? 'home' : 'home-outline'} size={28} color={selectedScreen === 'Home' ? Colors.light.button : Colors.dark.button}  />
           <Text style={{color: selectedScreen === 'Home' ? Colors.light.button : Colors.dark.button}}>Home</Text>
+        </Pressable>
+
+        {/* Trips Icon */}
+        <Pressable onPress={() => {setSelectedScreen('Trips'); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
+          { opacity: pressed ? 0.5 : 1, alignItems: 'center', justifyContent: 'center'}
+        ]}>
+          <Ionicons name={selectedScreen === 'Trips' ? 'car' : 'car-outline'} size={28} color={selectedScreen === 'Trips' ? Colors.light.button : Colors.dark.button}  />
+          <Text style={{color: selectedScreen === 'Trips' ? Colors.light.button : Colors.dark.button}}>Trips</Text>
+        </Pressable>
+
+        {/* Expenses Icon */}
+        <Pressable onPress={() => {setSelectedScreen('Expenses'); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
+          { opacity: pressed ? 0.5 : 1, alignItems: 'center', justifyContent: 'center'}
+        ]}>
+          <Ionicons name={selectedScreen === 'Expenses' ? 'card' : 'card-outline'} size={28} color={selectedScreen === 'Expenses' ? Colors.light.button : Colors.dark.button}  />
+          <Text style={{color: selectedScreen === 'Expenses' ? Colors.light.button : Colors.dark.button}}>Expenses</Text>
+        </Pressable>
+
+        {/* Tax Icon */}
+        <Pressable onPress={() => {setSelectedScreen('Tax'); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
+          { opacity: pressed ? 0.5 : 1, alignItems: 'center', justifyContent: 'center'}
+        ]}>
+          <Ionicons name={selectedScreen === 'Tax' ? 'document-text' : 'document-text-outline'} size={28} color={selectedScreen === 'Tax' ? Colors.light.button : Colors.dark.button}  />
+          <Text style={{color: selectedScreen === 'Tax' ? Colors.light.button : Colors.dark.button}}>Tax</Text>
         </Pressable>
       </View>
 
@@ -245,7 +270,9 @@ const styles = StyleSheet.create({
   },
 
   footerIconContainer: {
-    
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   button: {
     fontSize: 20,
