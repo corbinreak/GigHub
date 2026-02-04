@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, StatusBar, Pressable, Switch, SwitchComponent, Button } from "react-native";
+import { Text, View, StyleSheet, Image, StatusBar, Pressable, Switch, SwitchComponent, Button, TextInput } from "react-native";
 import {Link} from "expo-router";
 import { Colors } from '../constants/Color';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -31,7 +31,38 @@ export default function Index() {
       {!hasLoggedIn ? (
         <View style={styles.logInContainer}>
           <Text style={{fontSize: 24, marginBottom: 20, color: Colors.light.text}}>Welcome to GigHub</Text>
-          <Text style={{color: Colors.light.text}}>LOG IN FORM COMMING SOON...</Text>
+          <Text style={{fontSize: 16, marginBottom: 40, color: Colors.light.secondaryText}}>Please log in to continue</Text>
+
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor={Colors.light.secondaryText}
+            style={styles.inputText}
+          ></TextInput>
+
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor={Colors.light.secondaryText}
+            secureTextEntry={true}
+            style={styles.inputText}
+          ></TextInput>
+
+          <Pressable 
+            style={({pressed}) => [
+              {
+                backgroundColor: pressed ? '#0d1117' : '#273140',
+              },
+              styles.button,
+              {
+                padding: 15,
+                borderRadius: 10,
+                width: '80%',
+                alignItems: 'center',
+              }
+            ]}
+            onPress={() => {setHasLoggedIn(true); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}
+          >
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: 'bold'}}>Log In</Text>
+          </Pressable>
         </View>
       ) : (
       <>
@@ -149,6 +180,14 @@ export default function Index() {
             <Ionicons name ="chevron-forward" size={18} color="#555" />
             <Text style={[ styles.title, {color: Colors.light.text}]}>Notifications</Text>
           </View>
+        </Pressable>
+
+        <Pressable onPress={() => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft); setHasLoggedIn(false)}}>
+          <View style={styles.settingsLeft}>
+            <Ionicons name ="log-out-outline" size={18} color="#555" />
+            <Text style={[ styles.title, {color: Colors.light.text}]}>Log Out</Text>
+          </View>
+
         </Pressable>
         
 
@@ -299,7 +338,16 @@ const styles = StyleSheet.create({
     //Shadow for Android
     elevation: 10,
   },
-
+  inputText: {
+    width: '80%',
+    height: 50,
+    borderColor: Colors.light.border,
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+    color: Colors.light.text,
+  },
   footerIconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
