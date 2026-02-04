@@ -9,6 +9,7 @@ import * as Haptics from 'expo-haptics'
 
 
 export default function Index() {
+  const [hasLoggedIn, setHasLoggedIn] = useState(false);
   const [selectedScreen, setSelectedScreen] = useState<'Home' | 'Trips' | 'Expenses' | 'Tax'>('Home');
   const [isMenuEnabled, setIsMenuEnabled] = React.useState(false);
   const [startTracking, setStartTracking] = useState(false);
@@ -26,6 +27,14 @@ export default function Index() {
     <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
       <StatusBar animated={true} barStyle="dark-content" backgroundColor="#1a1f26" />
+      {/* Login Section */} 
+      {!hasLoggedIn ? (
+        <View style={styles.logInContainer}>
+          <Text style={{fontSize: 24, marginBottom: 20, color: Colors.light.text}}>Welcome to GigHub</Text>
+          <Text style={{color: Colors.light.text}}>LOG IN FORM COMMING SOON...</Text>
+        </View>
+      ) : (
+      <>
     <View style={[styles.header]}>
       
       {/* Left side of header*/}
@@ -72,6 +81,11 @@ export default function Index() {
    </View>
     {/* Content Area */}
         <View style={styles.infoCard}>
+        
+          {selectedScreen === 'Home' && <Text>Home Screen</Text>}
+          {selectedScreen === 'Trips' && <Text>Trips Screen</Text>}
+          {selectedScreen === 'Expenses' && <Text>Expenses Screen</Text>}
+          {selectedScreen === 'Tax' && <Text>Tax Screen</Text>}
 
         </View>
     
@@ -109,6 +123,7 @@ export default function Index() {
           <Text style={{color: selectedScreen === 'Tax' ? Colors.light.button : Colors.dark.button}}>Tax</Text>
         </Pressable>
       </View>
+      </>)}
 
 
       {/* Slide-out Profile Menu */}
@@ -155,6 +170,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.light.background
+  },
+  logInContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     flexDirection: 'row',
@@ -266,7 +286,18 @@ const styles = StyleSheet.create({
     flex: 1,
     top: -20,
     backgroundColor: Colors.light.card,
-    borderRadius: 45
+    borderRadius: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 15,
+    padding: 20,
+    //Shadow for iOS
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    //Shadow for Android
+    elevation: 10,
   },
 
   footerIconContainer: {
