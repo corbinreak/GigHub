@@ -5,6 +5,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, {useState} from "react";
 import SlideContainer from "../components/SlideContainer";
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics'
 
 
 export default function Index() {
@@ -12,7 +13,13 @@ export default function Index() {
   const [isMenuEnabled, setIsMenuEnabled] = React.useState(false);
   const [startTracking, setStartTracking] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const toggleSwitch = () => setIsMenuEnabled(previousState => !previousState);
+  
+  const toggleSwitch = () => {
+    setIsMenuEnabled(previousState => !previousState);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+  };
+
+
   
 
   return (
@@ -23,7 +30,7 @@ export default function Index() {
       
       {/* Left side of header*/}
      <View style={styles.leftHeader}>
-     <Pressable onPress={() => {setShowProfile(!showProfile)}} style={({pressed}) => [
+     <Pressable onPress={() => {setShowProfile(!showProfile); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
         styles.profilePressable,
         {
           opacity: pressed ? 0.5 : 1.0
@@ -69,21 +76,13 @@ export default function Index() {
         </View>
     
       {/* Footer with Icons */}
-      <View style={styles.footerIconDisplay}>
-        <Button
-          title="Go to Details"
-          color={Colors.light.button}
-          onPress={() => {}}
-        />
-        <Button
-          title="Start Shift"
-          color={Colors.light.profit}
-          onPress={() => {
-            setStartTracking(!startTracking);
-          }}
-        >
-
-        </Button>
+      <View style={styles.footerIconContainer}>
+        <Pressable onPress={() => {setSelectedScreen('Home'); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
+          { opacity: pressed ? 0.5 : 1, alignItems: 'center', justifyContent: 'center'}
+        ]}>
+          <Ionicons name={selectedScreen === 'Home' ? 'home' : 'home-outline'} size={28} color={selectedScreen === 'Home' ? Colors.light.button : Colors.dark.button}  />
+          <Text style={{color: selectedScreen === 'Home' ? Colors.light.button : Colors.dark.button}}>Home</Text>
+        </Pressable>
       </View>
 
 
@@ -97,7 +96,7 @@ export default function Index() {
         </View>
         <View style={styles.divider}></View>
 
-        <Pressable style={styles.settingsRow}>
+        <Pressable style={styles.settingsRow} onPress={() => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}}>
           <View style={styles.settingsRow}>
             <Ionicons name="chevron-forward" size={18} color="#555" />
             <Text style={[ styles.title, {color: Colors.light.text}]}>Profile</Text>
@@ -105,7 +104,7 @@ export default function Index() {
         </Pressable>
 
 
-        <Pressable>
+        <Pressable onPress={() => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}}>
           <View style={styles.settingsLeft}>
             <Ionicons name ="chevron-forward" size={18} color="#555" />
             <Text style={[ styles.title, {color: Colors.light.text}]}>Notifications</Text>
@@ -115,7 +114,7 @@ export default function Index() {
 
         <Pressable 
         style={styles.closeButton}
-        onPress={() => setShowProfile(false)}
+        onPress={() => {setShowProfile(false); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}}
         >
          <Text style={styles.closeTitle}>Close</Text> 
         </Pressable>
@@ -245,10 +244,8 @@ const styles = StyleSheet.create({
     borderRadius: 45
   },
 
-  footerIconDisplay: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+  footerIconContainer: {
+    
   },
   button: {
     fontSize: 20,

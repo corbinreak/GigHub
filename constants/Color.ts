@@ -9,7 +9,7 @@ export const Colors = {
         profit: '#10b981',
         loss: '#ef4444',
         secondary: '#64748b',
-        button: '#3b82f6',
+        button: '#273140',
         border: '#e2e8f0',
         tint: tintColorLight,
     },
@@ -21,7 +21,7 @@ export const Colors = {
         profit: '#10b981',
         loss: '#ef4444',
         secondary: '#94a3b8',
-        button: '#3b82f6',
+        button: '#273140',
         border: '#334155',
         tint: '#fff',
     }
