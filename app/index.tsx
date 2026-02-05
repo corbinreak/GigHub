@@ -7,6 +7,7 @@ import SlideContainer from "../components/SlideContainer";
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics'
 import LoginForm from "../components/LoginForm";
+import Header from "../components/Header";
 
 
 export default function Index() {
@@ -36,7 +37,15 @@ export default function Index() {
         />
       ) : (
       <>
-    
+      <Header 
+        showProfile={showProfile}
+        setShowProfile={setShowProfile}
+        isMenuEnabled={isMenuEnabled}
+        toggleSwitch={toggleSwitch}
+
+
+
+      />
     {/* Content Area */}
         <View style={styles.infoCard}>
         
@@ -137,42 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.light.background
   },
-  header: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 120,
-    backgroundColor: '#1a1f26',
-    paddingHorizontal: 15,
-    alignItems: 'center',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    gap: 10,
-    
-  },
-  leftHeader: { 
-    flex: 1,
-    alignItems: 'flex-start',
-    marginBottom: 15,
-
-  },
-  middleHeader:{
-    flex: 2,
-    alignItems:'center',
-  },
-  rightHeader:{
-    flex: 1,
-    alignItems: 'flex-end',
-    marginBottom: 15,
-  },
-  headerText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: Colors.dark.text,
-    fontSize: 14,
-  },
-  profilePressable: {
-    left: 30,
-  },
   drawerHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -219,12 +192,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  switchWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 2,
-    marginRight: 10,
-  },
   SwitchComponent: {
     transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
     
@@ -235,10 +202,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
     color: Colors.dark.text,
     
-  },
-  imgStyle: {
-    width: 45,
-    height: 45,
   },
   content: {
     flex: 1,
