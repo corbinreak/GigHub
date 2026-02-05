@@ -6,6 +6,7 @@ import React, {useState} from "react";
 import SlideContainer from "../components/SlideContainer";
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics'
+import LoginForm from "../components/LoginForm";
 
 
 export default function Index() {
@@ -29,87 +30,13 @@ export default function Index() {
       <StatusBar animated={true} barStyle="dark-content" backgroundColor="#1a1f26" />
       {/* Login Section */} 
       {!hasLoggedIn ? (
-        <View style={styles.logInContainer}>
-          <Text style={{fontSize: 24, marginBottom: 20, color: Colors.light.text}}>Welcome to GigHub</Text>
-          <Text style={{fontSize: 16, marginBottom: 40, color: Colors.light.secondaryText}}>Please log in to continue</Text>
-
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor={Colors.light.secondaryText}
-            style={styles.inputText}
-          ></TextInput>
-
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor={Colors.light.secondaryText}
-            secureTextEntry={true}
-            style={styles.inputText}
-          ></TextInput>
-
-          <Pressable 
-            style={({pressed}) => [
-              {
-                backgroundColor: pressed ? '#0d1117' : '#273140',
-              },
-              styles.button,
-              {
-                padding: 15,
-                borderRadius: 10,
-                width: '80%',
-                alignItems: 'center',
-              }
-            ]}
-            onPress={() => {setHasLoggedIn(true); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}
-          >
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: 'bold'}}>Log In</Text>
-          </Pressable>
-        </View>
+        
+        <LoginForm
+           setHasLoggedIn={setHasLoggedIn} 
+        />
       ) : (
       <>
-    <View style={[styles.header]}>
-      
-      {/* Left side of header*/}
-     <View style={styles.leftHeader}>
-     <Pressable onPress={() => {setShowProfile(!showProfile); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)}} style={({pressed}) => [
-        styles.profilePressable,
-        {
-          opacity: pressed ? 0.5 : 1.0
-        }
-     ]}>
-      
-      <Image
-       source={require('../assets/images/Profile-photo-light.png')} 
-       alt="Profile-Picture"
-       style={[styles.imgStyle]}
-      /> 
-      </Pressable>
-      
-      </View>
-
-      {/* Middle/Center side of header*/}
-      <View style={styles.middleHeader}>
-       <Text style={styles.headerText}>Week Of:</Text>
-        <Text style={styles.headerText}>Aug 12 - Aug 18, 2024</Text>
-        </View>
-
-
-       {/* Right side of header*/}
-       <View style={styles.rightHeader}>
-        <View style={styles.switchWrapper}>
-       <Switch
-         trackColor={{ false: "#767577", true: "#10b981" }}
-         thumbColor={isMenuEnabled ? "#f4F3f4" : "#fff"}
-         ios_backgroundColor="#3e3e3e"
-         onValueChange={toggleSwitch}
-         value={isMenuEnabled}
-         style={styles.SwitchComponent}
-       >
-        
-       </Switch>
-       <Text style={styles.switchLabel}>Track Miles</Text>
-       </View>
-    </View>
-   </View>
+    
     {/* Content Area */}
         <View style={styles.infoCard}>
         
@@ -209,11 +136,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.light.background
-  },
-  logInContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   header: {
     flexDirection: 'row',
@@ -338,24 +260,12 @@ const styles = StyleSheet.create({
     //Shadow for Android
     elevation: 10,
   },
-  inputText: {
-    width: '80%',
-    height: 50,
-    borderColor: Colors.light.border,
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginBottom: 20,
-    color: Colors.light.text,
-  },
   footerIconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   button: {
-    fontSize: 20,
-   
    
   }
 })
