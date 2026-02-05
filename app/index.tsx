@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics'
 import LoginForm from "../components/LoginForm";
 import Header from "../components/Header";
+import HomeScreen from "../components/HomeScreen";
 
 
 export default function Index() {
@@ -49,7 +50,7 @@ export default function Index() {
     {/* Content Area */}
         <View style={styles.infoCard}>
         
-          {selectedScreen === 'Home' && <Text>Home Screen</Text>}
+          {selectedScreen === 'Home' && <HomeScreen />}
           {selectedScreen === 'Trips' && <Text>Trips Screen</Text>}
           {selectedScreen === 'Expenses' && <Text>Expenses Screen</Text>}
           {selectedScreen === 'Tax' && <Text>Tax Screen</Text>}
