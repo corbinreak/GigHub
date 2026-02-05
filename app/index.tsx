@@ -118,8 +118,9 @@ export default function Index() {
           </View>
         </Pressable>
 
-        <Pressable onPress={() => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft); setHasLoggedIn(false)}}>
-          <View style={styles.settingsLeft}>
+
+        <Pressable onPress={() => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft); setHasLoggedIn(false); setShowProfile(false)}}>
+          <View style={styles.logOutButton}>
             <Ionicons name ="log-out-outline" size={18} color="#555" />
             <Text style={[ styles.title, {color: Colors.light.text}]}>Log Out</Text>
           </View>
@@ -187,7 +188,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-
+  logOutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+    marginTop: 60,
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
