@@ -9,6 +9,7 @@ import * as Haptics from 'expo-haptics'
 import LoginForm from "../components/LoginForm";
 import Header from "../components/Header";
 import HomeScreen from "../components/HomeScreen";
+import SignUp from "../components/SignUp";
 
 
 export default function Index() {
@@ -17,6 +18,7 @@ export default function Index() {
   const [isMenuEnabled, setIsMenuEnabled] = React.useState(false);
   const [startTracking, setStartTracking] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   
   const toggleSwitch = () => {
     setIsMenuEnabled(previousState => !previousState);
@@ -32,10 +34,19 @@ export default function Index() {
       <StatusBar animated={true} barStyle="dark-content" backgroundColor="#1a1f26" />
       {/* Login Section */} 
       {!hasLoggedIn ? (
-        
+        isSigningUp ? (
+          <SignUp
+            onGoBack={() => setIsSigningUp(false)}
+            setHasLoggedIn={setHasLoggedIn}
+            
+
+            />
+        ) : (
         <LoginForm
            setHasLoggedIn={setHasLoggedIn} 
+           onGoToSignUp={() => setIsSigningUp(true)}
         />
+       )
       ) : (
       <>
       <Header 
@@ -97,7 +108,10 @@ export default function Index() {
       {/* Slide-out Profile Menu */}
     
     {showProfile && (
-      <SlideContainer isVisible={showProfile}>
+      <SlideContainer
+        isVisible={showProfile}
+       
+        >
        <View style={styles.drawerHeader}>
           <Text style={styles.title}>Settings</Text>
           <Ionicons name="settings-sharp" size={20} color={Colors.light.text} />
