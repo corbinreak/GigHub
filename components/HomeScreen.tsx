@@ -149,6 +149,11 @@ const styles = StyleSheet.create({
         color: Colors.dark.text,
         marginBottom: 10,
         textAlign: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 2,
     },
     cardValue: {
         fontSize: 16,
