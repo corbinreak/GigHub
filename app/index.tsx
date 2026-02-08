@@ -10,6 +10,7 @@ import LoginForm from "../components/LoginForm";
 import Header from "../components/Header";
 import HomeScreen from "../components/HomeScreen";
 import SignUp from "../components/SignUp";
+import TripScreen from "../components/TripsScreen";
 
 
 export default function Index() {
@@ -62,7 +63,7 @@ export default function Index() {
         <View style={styles.infoCard}>
         
           {selectedScreen === 'Home' && <HomeScreen />}
-          {selectedScreen === 'Trips' && <Text>Trips Screen</Text>}
+          {selectedScreen === 'Trips' && <TripScreen />}
           {selectedScreen === 'Expenses' && <Text>Expenses Screen</Text>}
           {selectedScreen === 'Tax' && <Text>Tax Screen</Text>}
 
