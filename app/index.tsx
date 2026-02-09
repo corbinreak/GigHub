@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import HomeScreen from "../components/HomeScreen";
 import SignUp from "../components/SignUp";
 import TripScreen from "../components/TripsScreen";
+import ExpenseScreen from "../components/ExpenseScreen";
 
 
 export default function Index() {
@@ -64,7 +65,7 @@ export default function Index() {
         
           {selectedScreen === 'Home' && <HomeScreen />}
           {selectedScreen === 'Trips' && <TripScreen />}
-          {selectedScreen === 'Expenses' && <Text>Expenses Screen</Text>}
+          {selectedScreen === 'Expenses' && <ExpenseScreen />}
           {selectedScreen === 'Tax' && <Text>Tax Screen</Text>}
 
         </View>
